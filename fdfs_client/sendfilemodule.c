@@ -376,6 +376,7 @@ void
 initsendfile(void)
 #endif
 {
+struct module_state *st;
 #if PY_MAJOR_VERSION >= 3
     PyObject *module = PyModule_Create(&moduledef);
 #else
@@ -392,7 +393,7 @@ initsendfile(void)
 #endif
     if (module == NULL)
         INITERROR;
-    struct module_state *st = GETSTATE(module);
+    st = GETSTATE(module);
 
     st->error = PyErr_NewException("sendfile.Error", NULL, NULL);
     if (st->error == NULL) {
